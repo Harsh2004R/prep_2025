@@ -2,7 +2,7 @@
 let str = "racecar";
 let bag = "";
 for (let i = str.length - 1; i >= 0; i--) {
-    bag += str[i]
+  bag += str[i]
 }
 bag === str ? console.log("string is palindromic") : console.log("Stirng is not palindromic")
 
@@ -22,24 +22,63 @@ function removeDuplicates(arr) {
 
   return result
 }
-let ans = removeDuplicates([1,2,3,4,2,3,1])
+let ans = removeDuplicates([1, 2, 3, 4, 2, 3, 1])
 console.log(ans)
 
 
+// Real world problem, make request if promise reject based on given limit and delay...F 
 
+function getApi() {
+  return new Promise((resolve, reject) => {
+    let fake_data = {
+      status: true,
+      data: {
+        name: "res1",
+        id: 1,
+      }
+    }
+    if (fake_data.status)
+      resolve({ msg: "resolved", fake_data });
+    else reject("rejected");
+  })
+}
 
+function getApi() {
+  return new Promise((resolve, reject) => {
+    let fake_data = {
+      status: false, // change to false to simulate failure
+      data: {
+        name: "res1",
+        id: 1,
+      }
+    }
+    if (fake_data.status)
+      resolve({ msg: "resolved", fake_data });
+    else reject("rejected");
+  });
+}
 
+function requestWithRetry(func, limit, delay) {
+  let requestCount = 0;
 
+  function attempt() {
+    func()
+      .then((res) => {
+        console.log("Success:", res);
+      })
+      .catch((err) => {
+        requestCount++;
+        console.log(`Attempt ${requestCount} failed:`, err);
+        if (requestCount < limit) {
+          setTimeout(attempt, delay);
+        } else {
+          console.log("All retry attempts failed.");
+        }
+      });
+  }
 
+  attempt(); // Start first attempt
+}
 
-
-
-
-
-
-
-
-
-
-
+requestWithRetry(getApi, 3, 2000);
 
