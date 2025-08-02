@@ -82,3 +82,26 @@ function requestWithRetry(func, limit, delay) {
 
 requestWithRetry(getApi, 3, 2000);
 
+// Describe how you would implement a function that counts how many times a specific character appears in a string.
+
+let specific_str = "harshh";
+const charCountofString = ()=>{
+  let map = {};
+ for (let i = 0; i<specific_str.length;i++){
+  if(map[specific_str[i]]){
+    map[specific_str[i]]++;
+  }else{
+    map[specific_str[i]]=1
+  }
+ }
+ console.log(map)
+}
+
+charCountofString()
+
+
+
+
+
+
+
