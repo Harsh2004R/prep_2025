@@ -80,7 +80,7 @@ function requestWithRetry(func, limit, delay) {
   attempt(); // Start first attempt
 }
 
-requestWithRetry(getApi, 3, 2000);
+// requestWithRetry(getApi, 3, 2000);
 
 // Describe how you would implement a function that counts how many times a specific character appears in a string.
 
